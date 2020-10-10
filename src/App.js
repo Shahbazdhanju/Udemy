@@ -120,10 +120,10 @@ class App extends React.Component {
         <input type="text" onChange={this.inputChangehandler} value={this.state.userInput} />
         <h1>the lenght of the text :  {this.state.userInput}</h1>
 
-        <StyledButton alt={this.state.showPersons}
+        <button className="button"
           //style={style}
           onClick={this.togglePersonsHandler}>Toggle Person
-        </StyledButton>
+        </button>
         {persons}
       </div>
     )
