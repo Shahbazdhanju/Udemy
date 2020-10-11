@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react';
-import classes from './App.css'
-import Person from './Person/Person'
+import classes from './App.css';
+import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 //import './App.css';
 //import Radium, { StyleRoot } from 'radium'; // -- Pseudo selector and media queries
 //import styled from 'styled-components';
@@ -66,12 +67,14 @@ class App extends React.Component {
       persons = (
         <div >
           {this.state.persons.map((person, index) => {   //kinda for each loop 
-            return <Person
+            return <ErrorBoundary key= {person.id}>
+              <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
               key={person.id}  //mostly there is some id provided 
               changed={(event) => this.nameChangedHandler(event, person.id)} />
+            </ErrorBoundary>
           })}
         </div>
       );
