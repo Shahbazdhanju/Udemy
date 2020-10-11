@@ -1,22 +1,11 @@
 import React, { useState, Component } from 'react';
-import './App.css';
+import classes from './App.css'
 import Person from './Person/Person'
-import person from './Person/Person';
+//import './App.css';
 //import Radium, { StyleRoot } from 'radium'; // -- Pseudo selector and media queries
-import styled from 'styled-components';
+//import styled from 'styled-components';
 
-const StyledButton = styled.button`
-background-color: ${props => props.alt ? 'red' : 'green'}; 
-      font: inhert;             
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      color: white;
-      &:hover {
-        background-color: ${props => props.alt ? 'lightpink' : 'lightgreen'};
-        color: black;
-      }
-`;
+
 class App extends React.Component {
   state = {
     userInput: '',
@@ -70,21 +59,9 @@ class App extends React.Component {
   }
 
   render() {
-    // in-line render
-    // const style = {
-    //   backgroundColor: 'green',  //all these value need to be in couation 
-    //   font: 'inhert',             //we are using javascript
-    //   border: '1px solid blue',
-    //   padding: '8px',
-    //   cursor: 'pointer',
-    //   color: 'white',
-    //   ':hover': {
-    //     backgroundColor: 'lightgreen',
-    //     color: 'black'
-    //   }
-    // };
-
     let persons = null;
+    let btnClass = '';
+
     if (this.state.showPersons) {
       persons = (
         <div >
@@ -98,31 +75,25 @@ class App extends React.Component {
           })}
         </div>
       );
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'pink',
-      //   color: 'black'
-      // };
+      btnClass = classes.Red
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold')
+      assignedClasses.push(classes.bold)
     }
     return (
-      <div className='App'>
+      <div className={classes.App}>
         <h1>Hi, I am a react app</h1>
-        <p className={classes.join(' ')}>this is really working</p>
+        <p className={assignedClasses.join(' ')}>this is really working</p>
 
         <input type="text" onChange={this.inputChangehandler} value={this.state.userInput} />
         <h1>the lenght of the text :  {this.state.userInput}</h1>
 
-        <button className="button"
-          //style={style}
-          onClick={this.togglePersonsHandler}>Toggle Person
+        <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle Person
         </button>
         {persons}
       </div>
@@ -131,45 +102,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// state = { //object type
-//   persons: [
-//     {name: "max", age : 22},
-//     {name: "taj", age : 29},
-//     {name: "baz", age : 28}
-//   ]
-// }
-// switchNameHandler = () => {
-//   //console.log('was clicked');
-//   this.setState({
-//     persons: [
-//       {name: 'Shahbaz', age:28}]
-//     })
-// }
-
-
-// <Person
-// name={persotunsState.persons[0].name} 
-// age={personsState.persons[0].age} />
-// <Person
-// name={personsState.persons[1].name} 
-// age={personsState.persons[1].age}
-// click={this.switchNameHandler}> My Hobbies: racing </Person>
-// <Personk
-// name={personsState.persons[2].name} 
-// age={personsState.persons[2].age} />
-// </div>
-// );
-// }
-
-{/* <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Max')}>
-            changed={this.nameChangedHandler} My Hobbies: racing </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} /> */}
