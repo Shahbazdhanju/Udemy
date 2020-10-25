@@ -18,8 +18,6 @@ class App extends React.Component {
       otherState: 'Some other value',
       showPersons: false
     };
-  
-   
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -28,24 +26,24 @@ class App extends React.Component {
   }
 
 
-  // state = {
-  //   userInput: '',
-  //   persons: [
-  //     { id: "fgdfgd", name: "max", age: 22 },
-  //     { id: "dfgdfgd", name: "taj", age: 29 },
-  //     { id: "sdfsdf", name: "baz", age: 28 }
-  //   ],
-  //   otherState: 'Some other value',
-  //   showPersons: false
-  // };
+  state = {
+    userInput: '',
+    persons: [
+      { id: "fgdfgd", name: "max", age: 22 },
+      { id: "dfgdfgd", name: "taj", age: 29 },
+      { id: "sdfsdf", name: "baz", age: 28 }
+    ],
+    otherState: 'Some other value',
+    showPersons: false
+  };
 
   componentDidMount() {
     console.log('[App.js] componentDidMount')
   }
 
-  componentWillMount(){
-    console.log('[Apps.js] componentWillMount')
-  }
+  // componentWillMount(){
+  //   console.log('[Apps.js] componentWillMount')
+  // }
 
   switchNameHandler = () => {
     console.log('was clicked');
