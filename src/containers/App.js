@@ -4,16 +4,48 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends React.Component {
-  state = {
-    userInput: '',
-    persons: [
-      { id: "fgdfgd", name: "max", age: 22 },
-      { id: "dfgdfgd", name: "taj", age: 29 },
-      { id: "sdfsdf", name: "baz", age: 28 }
-    ],
-    otherState: 'Some other value',
-    showPersons: false
-  };
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constuctor')
+    this.state = {
+      userInput: '',
+      persons: [
+        { id: "fgdfgd", name: "max", age: 22 },
+        { id: "dfgdfgd", name: "taj", age: 29 },
+        { id: "sdfsdf", name: "baz", age: 28 }
+      ],
+      otherState: 'Some other value',
+      showPersons: false
+    };
+  
+   
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[Apps.js] getDrivedStateFromProps', props);
+    return state;
+  }
+
+
+  // state = {
+  //   userInput: '',
+  //   persons: [
+  //     { id: "fgdfgd", name: "max", age: 22 },
+  //     { id: "dfgdfgd", name: "taj", age: 29 },
+  //     { id: "sdfsdf", name: "baz", age: 28 }
+  //   ],
+  //   otherState: 'Some other value',
+  //   showPersons: false
+  // };
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
+  }
+
+  componentWillMount(){
+    console.log('[Apps.js] componentWillMount')
+  }
 
   switchNameHandler = () => {
     console.log('was clicked');
@@ -56,22 +88,24 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('[App.js] render')
     let persons = null;
-  
+
     if (this.state.showPersons) {
-      persons = 
-          <Persons
-          persons= {this.state.persons}
-          clicked= {this.deletePersonHandler}
-          changed= {this.nameChangedHandler}/>
+      persons =
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
     }
 
     return (
       <div className={classes.App}>
-        <Cockpit 
-        showPersons={this.state.showPersons} 
-        persons={this.state.persons}
-        clicked={this.togglePersonsHandler}/>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </div>
     )
