@@ -3,16 +3,16 @@ import classes from './Cockpit.css';
 
 const cockpit = (props) => {
 
-    useEffect(() => {
+     (() => {
         console.log('Cockpit : useEffect')
         //we can send an http req. 
          setTimeout(() => {
-            alert('save data to cloud');        //this a;ert is called evertime a page refresh or changes
+            alert('save data to cloud');        //this alert is called evertime a page refresh or changes
         }, 1000);
         return () =>{
             console.log('[cockpit.js] cleanup work in useEffect');
         }
-        // }, [props.persons])  //IMPROVED-we added this 2nd argument to teel when to run this.-so only when the props.persons changes  
+        // }, [props.persons])  //IMPROVED-we added this 2nd argument to tell when to run this.-so only when the props.persons changes  
     }, []) //we can react to render it only once in the beging- achived by empty array []-no dependiences - no changes IMP.
     
     useEffect(() => {
