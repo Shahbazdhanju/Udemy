@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+.App button{
+       background-color: green; 
+      font: inhert;             
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+      color: white;
+}
+

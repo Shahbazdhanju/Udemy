@@ -1,23 +1,39 @@
 import React, { useState, Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
-//import './App.css';
-//import Radium, { StyleRoot } from 'radium'; // -- Pseudo selector and media queries
-//import styled from 'styled-components';
-
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constuctor')
+
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[Apps.js] getDrivedStateFromProps', props);
+    return state;
+  }
+ 
   state = {
-    userInput: '',
     persons: [
       { id: "fgdfgd", name: "max", age: 22 },
       { id: "dfgdfgd", name: "taj", age: 29 },
       { id: "sdfsdf", name: "baz", age: 28 }
     ],
     otherState: 'Some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   };
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
+  }
+
+  // componentWillMount(){
+  //   console.log('[Apps.js] componentWillMount')
+  // }
 
   switchNameHandler = () => {
     console.log('was clicked');
@@ -60,44 +76,32 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('[App.js] render')
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
-      persons = (
-        <div >
-          {this.state.persons.map((person, index) => {   //kinda for each loop 
-            return <ErrorBoundary key= {person.id}>
-              <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}  //mostly there is some id provided 
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
-            </ErrorBoundary>
-          })}
-        </div>
-      );
-      btnClass = classes.Red
+      persons =
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
     }
 
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold)
-    }
     return (
       <div className={classes.App}>
-        <h1>Hi, I am a react app</h1>
-        <p className={assignedClasses.join(' ')}>this is really working</p>
-
-        <input type="text" onChange={this.inputChangehandler} value={this.state.userInput} />
-        <h1>the lenght of the text :  {this.state.userInput}</h1>
-
-        <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle Person
+        <button onClick={() =>
+          this.setState({ showCockpit: false })
+        }>Remove Cockpit
         </button>
+
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler}
+          />
+        ) : null}
         {persons}
       </div>
     )
