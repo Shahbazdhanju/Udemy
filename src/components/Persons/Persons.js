@@ -8,23 +8,32 @@ class Persons extends React.Component {
     //     return state;
     // } 
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
         console.log('[Perons.js] shouldComponentUpdate')
-        return true;
+        if(nextProps.persons !== this.props.persons){
+            return true;
+        }else{
+            return false;
+        }
+       
         //we suppose to imple,emt code here to check if we 
         //cont. want to update =the component
     }
 
-    getSnapshotBeforeUpdate(prevProps, prevState){
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate');
-        return {message: 'snapshot!!'};
+        return { message: 'snapshot!!' };
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){
+    componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('perosns.js componentDidUpdate')
-     //   console.log('Persons.js componentDidUpdate')
+        //   console.log('Persons.js componentDidUpdate')f
     }
 
+    componentWillUnmount() {
+        console.log('[Person.js] componentWillUnmount');
+    }
+     
     render() {
         console.log('Persons.js rendering...');
         return this.props.persons.map((person, index) => {   //kinda for each loop 

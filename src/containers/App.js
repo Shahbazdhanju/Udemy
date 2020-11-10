@@ -8,33 +8,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     console.log('[App.js] constuctor')
-    this.state = {
-      userInput: '',
-      persons: [
-        { id: "fgdfgd", name: "max", age: 22 },
-        { id: "dfgdfgd", name: "taj", age: 29 },
-        { id: "sdfsdf", name: "baz", age: 28 }
-      ],
-      otherState: 'Some other value',
-      showPersons: false
-    };
+
   }
 
   static getDerivedStateFromProps(props, state) {
     console.log('[Apps.js] getDrivedStateFromProps', props);
     return state;
   }
-
-
+ 
   state = {
-    userInput: '',
     persons: [
       { id: "fgdfgd", name: "max", age: 22 },
       { id: "dfgdfgd", name: "taj", age: 29 },
       { id: "sdfsdf", name: "baz", age: 28 }
     ],
     otherState: 'Some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   };
 
   componentDidMount() {
@@ -99,11 +89,19 @@ class App extends React.Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler} />
+        <button onClick={() =>
+          this.setState({ showCockpit: false })
+        }>Remove Cockpit
+        </button>
+
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler}
+          />
+        ) : null}
         {persons}
       </div>
     )
